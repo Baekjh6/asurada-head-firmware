@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asurada Head firmware installer</title>
+<meta name="description" content="Install the Asurada Head desk figure firmware from your browser (Chrome or Edge on a PC).">
+<style>
+:root{--bg:#f6f7fb;--card:#ffffff;--ink:#17203a;--muted:#5b6785;--line:#dde2ee;--accent:#e8262f;--accent-ink:#ffffff;--warn-bg:#fff4e5;--warn-ink:#7a4300;--code:#eef1f8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1224;--card:#151c33;--ink:#e8ecf8;--muted:#9aa6c8;--line:#27304d;--accent:#ff4d55;--accent-ink:#1a0a0c;--warn-bg:#33270f;--warn-ink:#ffd48a;--code:#1d2642}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+html[lang="ko"] body{word-break:keep-all;overflow-wrap:anywhere}
+main{max-width:760px;margin:0 auto;padding:20px 16px 56px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{font-size:1.7rem;line-height:1.25;margin:.2em 0 .1em}
+h2{font-size:1.15rem;margin:1.6em 0 .5em}
+p{margin:.5em 0}
+.sub{color:var(--muted);margin-top:.2em}
+.lang{display:flex;gap:4px;flex:none}
+.lang button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.card ul,.card ol{margin:.4em 0;padding-left:1.3em}
+.card li{margin:.25em 0}
+.install{text-align:center;padding:24px 16px}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:14px 28px;font:inherit;font-weight:700;font-size:1.1rem;cursor:pointer}
+.btn:hover{filter:brightness(1.06)}
+.ver{color:var(--muted);font-size:.9rem;margin-top:10px}
+.warn{display:block;background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:10px 14px;font-weight:600}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600}
+code{background:var(--code);border-radius:5px;padding:1px 6px;font-family:Consolas,"Cascadia Mono",monospace;font-size:.92em}
+a{color:inherit;text-underline-offset:3px}
+footer{color:var(--muted);font-size:.9rem;margin-top:28px}
+[data-l]{display:none}
+html[lang="en"] [data-l="en"],html[lang="ko"] [data-l="ko"]{display:revert}
+html[lang="en"] span[data-l="en"],html[lang="ko"] span[data-l="ko"]{display:inline}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div>
+    <h1><span data-l="en">Asurada Head<br>firmware installer</span><span data-l="ko">아스라다 헤드<br>펌웨어 설치</span></h1>
+    <p class="sub"><span data-l="en">Installs the desk figure's firmware on the Waveshare ESP32-S3-Touch-AMOLED-1.75 round display board straight from your browser. No software to install.</span><span data-l="ko">Waveshare ESP32-S3-Touch-AMOLED-1.75 원형 디스플레이 보드에 탁상 피규어 펌웨어를 브라우저에서 바로 설치합니다. 따로 설치할 프로그램은 없습니다.</span></p>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-set="en" aria-pressed="false">EN</button>
+    <button type="button" data-set="ko" aria-pressed="false">한국어</button>
+  </div>
+</header>
+
+<section class="card">
+  <strong><span data-l="en">Before you start</span><span data-l="ko">시작하기 전에</span></strong>
+  <ul data-l="en">
+    <li>A PC with <b>Chrome or Edge</b> (a phone is not recommended).</li>
+    <li>A USB <b>data</b> cable (a charge-only cable will not work).</li>
+    <li>Plug the cable into the <b>USB socket on the stand</b>. This works when its four wires (5V, GND, D+, D-) are connected to the display board as in the assembly guide. Otherwise use the <b>display board's own USB-C port</b>: the screen bezel is held by magnets and comes off.</li>
+    <li>Close any serial monitor or other program that uses the board's serial port.</li>
+  </ul>
+  <ul data-l="ko">
+    <li><b>Chrome 또는 Edge</b>가 있는 PC (휴대폰은 권장하지 않습니다).</li>
+    <li>USB <b>데이터</b> 케이블 (충전 전용 케이블은 안 됩니다).</li>
+    <li>케이블은 <b>받침대의 USB 소켓</b>에 꽂습니다. 조립 설명서대로 선 4가닥(5V, GND, D+, D-)을 화면 보드에 연결했을 때 됩니다. 그렇지 않으면 <b>화면 보드 자체의 USB-C 포트</b>를 씁니다. 화면 테두리는 자석으로 붙어 있어 떼어 낼 수 있습니다.</li>
+    <li>보드의 시리얼 포트를 쓰는 다른 프로그램(시리얼 모니터 등)은 닫아 둡니다.</li>
+  </ul>
+</section>
+
+<section class="card install">
+  <esp-web-install-button manifest="manifest.json">
+    <button slot="activate" class="btn" type="button"><span data-l="en">Install firmware</span><span data-l="ko">펌웨어 설치</span></button>
+    <span slot="unsupported" class="warn"><span data-l="en">This browser cannot install firmware. Open this page in Chrome or Edge on a PC.</span><span data-l="ko">이 브라우저에서는 설치할 수 없습니다. PC의 Chrome 또는 Edge에서 이 페이지를 여세요.</span></span>
+    <span slot="not-allowed" class="warn"><span data-l="en">Installing only works on an HTTPS page. Open this page from its https:// address.</span><span data-l="ko">설치는 HTTPS 주소에서만 됩니다. https:// 주소로 이 페이지를 여세요.</span></span>
+  </esp-web-install-button>
+  <div class="ver"><span data-l="en">Firmware version:</span><span data-l="ko">펌웨어 버전:</span> <code id="ver">…</code></div>
+</section>
+
+<h2><span data-l="en">Steps</span><span data-l="ko">설치 순서</span></h2>
+<section class="card">
+  <ol data-l="en">
+    <li>Connect the figure to your PC with the USB cable.</li>
+    <li>Click <b>Install firmware</b> and choose the new serial port that appears when you plug the figure in.</li>
+    <li>If asked, choose whether to erase the device first. For a first install, erasing is recommended; it also removes the saved volume and servo settings. Then confirm and wait until it says the installation is complete. Do not unplug the cable. It can take a few minutes.</li>
+    <li>The head restarts and shows four green eyes.</li>
+  </ol>
+  <ol data-l="ko">
+    <li>피규어를 USB 케이블로 PC에 연결합니다.</li>
+    <li><b>펌웨어 설치</b>를 누르고, 피규어를 꽂았을 때 새로 생기는 시리얼 포트를 고릅니다.</li>
+    <li>기기를 먼저 지울지 물으면 선택합니다. 처음 설치라면 지우기를 권장하며, 저장된 볼륨과 서보 설정도 같이 지워집니다. 확인한 뒤 설치가 끝났다는 안내가 나올 때까지 기다립니다. 케이블을 뽑지 마세요. 몇 분 걸릴 수 있습니다.</li>
+    <li>머리가 다시 시작하고 초록 눈 4개가 나옵니다.</li>
+  </ol>
+</section>
+
+<h2><span data-l="en">How to use it</span><span data-l="ko">쓰는 방법</span></h2>
+<section class="card">
+  <div class="scroll">
+  <table data-l="en">
+    <tr><th>You do</th><th>The figure does</th></tr>
+    <tr><td>Tap the screen on standby</td><td>Speed counter, 0 to 200</td></tr>
+    <tr><td>Tap on the speed counter</td><td>Booster stage 1 (9 seconds), then back to standby</td></tr>
+    <tr><td>Tap during stage 1</td><td>Stage 1, then stage 2 slides in (5 seconds)</td></tr>
+    <tr><td>Tap during another sequence</td><td>Stops and returns to standby</td></tr>
+    <tr><td>Hold the screen for 3 seconds on standby</td><td>The full sequence: speed counter, stage 1, stage 2</td></tr>
+    <tr><td>Swipe up or down</td><td>Volume up or down</td></tr>
+    <tr><td>Swipe right or left on standby</td><td>Background music A or B; tap to stop</td></tr>
+    <tr><td>Say "Hi ESP", then "One", "Two" or "Three"</td><td>Stage 1 / stage 1 and 2 / the full sequence</td></tr>
+    <tr><td>Say "Hi ESP", then "Four" or "Five"</td><td>Background music A or B</td></tr>
+  </table>
+  <table data-l="ko">
+    <tr><th>하는 것</th><th>피규어의 동작</th></tr>
+    <tr><td>대기화면에서 화면 터치</td><td>속도 숫자 0 → 200</td></tr>
+    <tr><td>속도 숫자 화면에서 터치</td><td>1단 부스터(9초) 뒤 대기화면으로</td></tr>
+    <tr><td>1단 중에 터치</td><td>1단에 이어 2단이 밀려 들어옴(5초)</td></tr>
+    <tr><td>그 밖의 진행 중 터치</td><td>멈추고 대기화면으로</td></tr>
+    <tr><td>대기화면에서 3초 길게 누르기</td><td>전체 시퀀스: 속도 숫자, 1단, 2단</td></tr>
+    <tr><td>위·아래로 밀기</td><td>볼륨 올리기·내리기</td></tr>
+    <tr><td>대기화면에서 오른쪽·왼쪽으로 밀기</td><td>배경음악 A·B, 터치하면 정지</td></tr>
+    <tr><td>"Hi ESP"라고 부른 뒤 "One", "Two", "Three"</td><td>1단 / 1단+2단 / 전체 시퀀스</td></tr>
+    <tr><td>"Hi ESP"라고 부른 뒤 "Four", "Five"</td><td>배경음악 A·B</td></tr>
+  </table>
+  </div>
+  <p><span data-l="en">Every 30 seconds the head turns about 30 degrees and back. The standby screen dims after one minute without input. While a sound is playing or a sequence is running, voice commands are ignored.</span><span data-l="ko">30초마다 머리가 약 30도 돌았다가 돌아옵니다. 대기화면은 입력 없이 1분이 지나면 어두워집니다. 소리가 나거나 시퀀스가 진행되는 동안에는 음성 명령을 듣지 않습니다.</span></p>
+</section>
+
+<h2><span data-l="en">Sounds: add your own</span><span data-l="ko">소리: 직접 넣기</span></h2>
+<section class="card">
+  <p><span data-l="en"><b>No sound files are included.</b> Without a card the figure runs silently and every screen still works. To add sounds, format a microSD card as FAT32, make the folders below and put <b>one WAV file</b> into each (the first <code>.wav</code> in a folder is played; the file name is free).</span><span data-l="ko"><b>소리 파일은 포함되어 있지 않습니다.</b> 카드가 없으면 소리 없이 동작하고 화면은 모두 나옵니다. 소리를 넣으려면 microSD 카드를 FAT32로 포맷하고 아래 폴더를 만든 뒤 폴더마다 <b>WAV 파일 하나</b>를 넣습니다 (폴더의 첫 번째 <code>.wav</code>를 재생하고 파일 이름은 자유입니다).</span></p>
+  <div class="scroll">
+  <table data-l="en">
+    <tr><th>Folder</th><th>Played when</th><th>Screen length</th></tr>
+    <tr><td><code>/1</code></td><td>The figure starts</td><td>-</td></tr>
+    <tr><td><code>/2</code></td><td>A tap opens the speed counter</td><td>-</td></tr>
+    <tr><td><code>/3</code></td><td>The board's PWR button is pressed</td><td>-</td></tr>
+    <tr><td><code>/4</code></td><td>Booster stage 1 (tap on the speed counter, or "One")</td><td>9 s</td></tr>
+    <tr><td><code>/5</code></td><td>Stage 1 and stage 2 (tap during stage 1, or "Two")</td><td>14 s</td></tr>
+    <tr><td><code>/6</code></td><td>The full sequence (hold 3 s, or "Three")</td><td>17 s</td></tr>
+    <tr><td><code>/7</code></td><td>Background music A (swipe right, or "Four"), repeats</td><td>-</td></tr>
+    <tr><td><code>/8</code></td><td>Background music B (swipe left, or "Five"), repeats</td><td>-</td></tr>
+  </table>
+  <table data-l="ko">
+    <tr><th>폴더</th><th>재생되는 때</th><th>화면 길이</th></tr>
+    <tr><td><code>/1</code></td><td>켜질 때</td><td>-</td></tr>
+    <tr><td><code>/2</code></td><td>터치로 속도 숫자 화면이 열릴 때</td><td>-</td></tr>
+    <tr><td><code>/3</code></td><td>보드의 PWR 버튼을 누를 때</td><td>-</td></tr>
+    <tr><td><code>/4</code></td><td>1단 부스터 (속도 숫자 화면에서 터치, 또는 "One")</td><td>9초</td></tr>
+    <tr><td><code>/5</code></td><td>1단 + 2단 (1단 중에 터치, 또는 "Two")</td><td>14초</td></tr>
+    <tr><td><code>/6</code></td><td>전체 시퀀스 (3초 길게 누르기, 또는 "Three")</td><td>17초</td></tr>
+    <tr><td><code>/7</code></td><td>배경음악 A (오른쪽으로 밀기, 또는 "Four"), 반복</td><td>-</td></tr>
+    <tr><td><code>/8</code></td><td>배경음악 B (왼쪽으로 밀기, 또는 "Five"), 반복</td><td>-</td></tr>
+  </table>
+  </div>
+  <ul data-l="en">
+    <li>Format: <b>16-bit PCM WAV</b>, mono or stereo, 8 kHz or higher. The firmware converts it to 16 kHz mono while playing. MP3 does not play.</li>
+    <li>The screens run on their own timing (the lengths above), so a sound of about the same length fits best.</li>
+    <li>Use sounds you made yourself or have the right to use.</li>
+  </ul>
+  <ul data-l="ko">
+    <li>형식: <b>16비트 PCM WAV</b>, 모노 또는 스테레오, 8 kHz 이상. 펌웨어가 재생하면서 16 kHz 모노로 바꿉니다. MP3는 재생되지 않습니다.</li>
+    <li>화면은 정해진 시간(위 표의 길이)으로 움직이므로, 비슷한 길이의 소리가 잘 맞습니다.</li>
+    <li>직접 만들었거나 쓸 권리가 있는 소리를 쓰세요.</li>
+  </ul>
+</section>
+
+<h2><span data-l="en">If something goes wrong</span><span data-l="ko">잘 안 될 때</span></h2>
+<section class="card">
+  <ul data-l="en">
+    <li><b>The port list is empty:</b> use a data cable and another USB port. If it still does not show, unplug the cable, hold the <b>switch on the stand</b> (it is wired to the board's BOOT pin) while plugging it in, then try again.</li>
+    <li><b>The install stops or fails:</b> unplug and reconnect, close other programs that use the port, and try again, this time with erasing turned on.</li>
+    <li><b>The screen shows SETUP ERROR:</b> the board was not written completely. Install again from this page with erasing turned on.</li>
+    <li><b>No suitable browser:</b> install with a PC tool instead. See <a href="README.md">README.md</a> (esptool or the Espressif Flash Download Tool) and the files in <a href="firmware/">firmware/</a>.</li>
+  </ul>
+  <ul data-l="ko">
+    <li><b>포트 목록이 비어 있을 때:</b> 데이터 케이블과 다른 USB 포트를 써 보세요. 그래도 안 보이면 케이블을 뽑고, <b>받침대의 스위치</b>(보드의 BOOT 핀에 연결되어 있습니다)를 누른 채로 꽂은 뒤 다시 시도합니다.</li>
+    <li><b>설치가 멈추거나 실패할 때:</b> 케이블을 뽑았다 다시 꽂고, 포트를 쓰는 다른 프로그램을 닫은 뒤, 이번에는 지우기를 켜고 다시 시도합니다.</li>
+    <li><b>화면에 SETUP ERROR가 나올 때:</b> 보드에 다 써지지 않은 것입니다. 이 페이지에서 지우기를 켜고 다시 설치합니다.</li>
+    <li><b>쓸 수 있는 브라우저가 없을 때:</b> PC 도구로 설치합니다. <a href="README.md">README.md</a>(esptool 또는 Espressif Flash Download Tool)와 <a href="firmware/">firmware/</a>의 파일을 보세요.</li>
+  </ul>
+</section>
+
+<h2><span data-l="en">Good to know</span><span data-l="ko">알아 두세요</span></h2>
+<section class="card">
+  <ul data-l="en">
+    <li>Installing replaces the program that is on the board.</li>
+    <li>The firmware does not use Wi-Fi or the internet.</li>
+    <li>The sketch source is in <a href="source/asurada_v02/">source/asurada_v02</a>; <a href="README.md">README.md</a> has the Arduino IDE settings.</li>
+    <li>This firmware is provided as is. It is an unofficial fan-made project based on the anime Cyber Formula and is not affiliated with or endorsed by the rights holders. Licences of the components it uses: <a href="THIRD-PARTY-NOTICES.txt">THIRD-PARTY-NOTICES.txt</a>. File checksums: <a href="firmware/SHA256SUMS.txt">SHA256SUMS.txt</a>.</li>
+  </ul>
+  <ul data-l="ko">
+    <li>설치하면 보드에 들어 있던 프로그램이 바뀝니다.</li>
+    <li>이 펌웨어는 Wi-Fi나 인터넷을 쓰지 않습니다.</li>
+    <li>스케치 소스는 <a href="source/asurada_v02/">source/asurada_v02</a>에 있고, Arduino IDE 설정은 <a href="README.md">README.md</a>에 있습니다.</li>
+    <li>이 펌웨어는 있는 그대로 제공됩니다. 애니메이션 사이버 포뮬러를 소재로 한 비공식 팬 제작 프로젝트이며, 권리자와 관련이 없고 승인을 받은 것이 아닙니다. 사용한 구성 요소의 라이선스: <a href="THIRD-PARTY-NOTICES.txt">THIRD-PARTY-NOTICES.txt</a>. 파일 체크섬: <a href="firmware/SHA256SUMS.txt">SHA256SUMS.txt</a>.</li>
+  </ul>
+</section>
+
+<footer>
+  <span data-l="en">Installer built with <a href="https://github.com/esphome/esp-web-tools">ESP Web Tools</a> (Apache-2.0).</span><span data-l="ko">설치 도구: <a href="https://github.com/esphome/esp-web-tools">ESP Web Tools</a> (Apache-2.0).</span>
+</footer>
+</main>
+
+<script type="module" src="vendor/esp-web-tools/install-button.js"></script>
+<script>
+(function () {
+  var html = document.documentElement;
+  function setLang(l) {
+    html.setAttribute('lang', l);
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === l ? 'true' : 'false'); });
+    try { localStorage.setItem('asuradahead-lang', l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('asuradahead-lang'); } catch (e) {}
+  setLang(saved || ((navigator.language || '').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en'));
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.set); }); });
+  fetch('manifest.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (m) {
+    document.getElementById('ver').textContent = m.version;
+  }).catch(function () { document.getElementById('ver').textContent = '?'; });
+})();
+</script>
+</body>
+</html>
