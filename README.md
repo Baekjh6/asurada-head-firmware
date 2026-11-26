@@ -105,6 +105,9 @@ Changed values are saved on the board. / 바꾼 값은 보드에 저장됩니다
 
 ## Building from source / 소스에서 빌드
 
+> **v03 (source only):** `source/asurada_v03` is the next version, with a wake word engine for a model you train yourself ("Hi Asurada" on the maker's figure). The trained model is not included and there is no firmware file for it; see `source/asurada_v03/README.md`. Everything else in this README describes v02, the firmware in `firmware/`.
+> **v03 (소스만):** `source/asurada_v03` 은 직접 학습한 모델을 돌리는 호출어 엔진을 넣은 다음 판입니다 (제작자의 피규어에서는 "Hi Asurada"). 학습한 모델과 설치용 펌웨어 파일은 들어 있지 않습니다. `source/asurada_v03/README.md` 를 보세요. 이 README의 나머지는 `firmware/` 에 있는 v02 기준입니다.
+
 The sketch is in `source/asurada_v02`. / 스케치는 `source/asurada_v02` 에 있습니다.
 
 - Arduino IDE with the **esp32** board package 3.3.10 / Arduino IDE와 **esp32** 보드 패키지 3.3.10
