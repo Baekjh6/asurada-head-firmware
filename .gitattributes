@@ -1,0 +1,4 @@
+# Keep the checksum list with LF line endings on every system
+# (sha256sum -c fails when a Windows checkout turns it into CRLF).
+firmware/SHA256SUMS.txt text eol=lf
+*.bin binary
