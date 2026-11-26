@@ -2,8 +2,8 @@
 
 **Install page / 설치 페이지: https://baekjh6.github.io/asurada-head-firmware/**
 
-Firmware for the **Waveshare ESP32-S3-Touch-AMOLED-1.75** round display board used in the Asurada Head desk figure (standby eyes, speed counter, two booster countdown screens, five LEDs, a 360-degree servo, English voice commands after "Hi ESP"). **No sound files are included.**
-Asurada Head 탁상 피규어에 쓰는 Waveshare ESP32-S3-Touch-AMOLED-1.75 원형 디스플레이 보드용 펌웨어입니다 (대기화면의 눈, 속도 숫자, 부스터 카운트다운 화면 2개, LED 5개, 360도 서보, "Hi ESP" 뒤 영어 음성 명령). **소리 파일은 포함되어 있지 않습니다.**
+Firmware for the **Waveshare ESP32-S3-Touch-AMOLED-1.75** round display board used in the Asurada Head desk figure (standby eyes, speed counter, two booster countdown screens, five LEDs, a 360-degree servo, English voice commands after the wake word "Hi Asurada"). **No sound files are included.** **The "Hi Asurada" wake word model in this firmware is for non-commercial personal use only** (see Notes).
+Asurada Head 탁상 피규어에 쓰는 Waveshare ESP32-S3-Touch-AMOLED-1.75 원형 디스플레이 보드용 펌웨어입니다 (대기화면의 눈, 속도 숫자, 부스터 카운트다운 화면 2개, LED 5개, 360도 서보, 호출어 "Hi Asurada" 뒤 영어 음성 명령). **소리 파일은 포함되어 있지 않습니다.** **이 펌웨어에 들어 있는 "Hi Asurada" 호출어 모델은 비상업 개인용으로만 쓸 수 있습니다** (참고 항목).
 
 This is an unofficial fan-made project based on the anime Cyber Formula. It is not affiliated with or endorsed by the rights holders.
 애니메이션 사이버 포뮬러를 소재로 한 비공식 팬 제작 프로젝트이며, 권리자와 관련이 없고 승인을 받은 것이 아닙니다.
@@ -40,8 +40,8 @@ Choose chip **ESP32-S3**, then either add the single file `asurada-head-full-0x0
 | `0x0` | `firmware/bootloader.bin` | Bootloader / 부트로더 |
 | `0x8000` | `firmware/partition-table.bin` | Partition table (Arduino "ESP SR 16M") / 파티션 표 |
 | `0xe000` | `firmware/boot_app0.bin` | Selects the first app slot / 첫 번째 앱 자리를 고르는 파일 |
-| `0x10000` | `firmware/asurada-head-app.bin` | The figure's program / 피규어 프로그램 |
-| `0xc10000` | `firmware/voice-models.bin` | Voice models ("Hi ESP" wake word and English commands) / 음성 모델 |
+| `0x10000` | `firmware/asurada-head-app.bin` | The figure's program, with the "Hi Asurada" wake word model / 피규어 프로그램 ("Hi Asurada" 호출어 모델 포함) |
+| `0xc10000` | `firmware/voice-models.bin` | Espressif voice models (English commands) / Espressif 음성 모델 (영어 명령어) |
 
 `firmware/SHA256SUMS.txt` lists the checksums. Check one on Windows with `Get-FileHash firmware\asurada-head-app.bin`.
 체크섬은 `firmware/SHA256SUMS.txt` 에 있습니다. 윈도우에서는 `Get-FileHash firmware\asurada-head-app.bin` 으로 확인합니다.
@@ -59,8 +59,12 @@ The head restarts and shows four green eyes. It needs no Wi-Fi. Without a microS
 | Hold 3 s on standby / 대기화면에서 3초 길게 누르기 | Speed counter, stage 1, stage 2 / 속도 숫자, 1단, 2단 |
 | Swipe up or down / 위·아래로 밀기 | Volume / 볼륨 |
 | Swipe right or left on standby / 대기화면에서 오른쪽·왼쪽으로 밀기 | Background music A or B; tap to stop / 배경음악 A·B, 터치하면 정지 |
-| "Hi ESP", then "One" / "Two" / "Three" | Stage 1 / stage 1 and 2 / full sequence |
-| "Hi ESP", then "Four" / "Five" | Background music A / B |
+| "Hi Asurada", then "One" / "Two" | Stage 1 / stage 1 and 2 · 1단 / 1단+2단 |
+| "Hi Asurada", then "Three" / "Five" | Background music A / B · 배경음악 A / B |
+| "Hi Asurada", then "Four" | Full sequence · 전체 시퀀스 |
+
+When the figure hears "Hi Asurada", LISTENING appears between the eyes; then say the command.
+"Hi Asurada"를 들으면 눈 사이에 LISTENING이 뜨고, 그때 명령어를 말합니다.
 
 ## Sounds on the microSD card / microSD 카드의 소리
 
@@ -74,8 +78,8 @@ No sound files are included. Format the card as FAT32, make the folders `/1` to 
 | `/3` | The board's PWR button / 보드의 PWR 버튼 | - |
 | `/4` | Booster stage 1 (tap on the speed counter, or "One") / 1단 부스터 | 9 s |
 | `/5` | Stage 1 and 2 (tap during stage 1, or "Two") / 1단 + 2단 | 14 s |
-| `/6` | Full sequence (hold 3 s, or "Three") / 전체 시퀀스 | 17 s |
-| `/7` | Background music A (swipe right, or "Four"), repeats / 배경음악 A, 반복 | - |
+| `/6` | Full sequence (hold 3 s, or "Four") / 전체 시퀀스 | 17 s |
+| `/7` | Background music A (swipe right, or "Three"), repeats / 배경음악 A, 반복 | - |
 | `/8` | Background music B (swipe left, or "Five"), repeats / 배경음악 B, 반복 | - |
 
 ## Wiring the firmware expects / 펌웨어가 쓰는 배선
@@ -99,25 +103,25 @@ Everything else (display, touch, audio codec, microphones, power chip, motion se
 | `T` | Turn once now / 지금 한 번 동작 |
 | `R` | Back to the values in `config.h` / `config.h` 의 값으로 되돌림 |
 | `+` `-` | Shift the screen against the sound by 20 ms / 소리와 화면을 20 ms씩 맞춤 |
-| `1` `2` `3` | Same as saying "One", "Two", "Three" / "One", "Two", "Three"와 같음 |
+| `1` `2` `3` | Stage 1 / stage 1 and 2 / full sequence (same as saying "One", "Two", "Four") / 1단 / 1단+2단 / 전체 시퀀스 |
+| `W90` | Wake word detection threshold 0.90 (default 0.97; lower = easier to trigger) / 호출어 판정 기준 0.90 (기본 0.97, 낮출수록 잘 반응) |
 
 Changed values are saved on the board. / 바꾼 값은 보드에 저장됩니다.
 
 ## Building from source / 소스에서 빌드
 
-> **v03 (source only):** `source/asurada_v03` is the next version, with a wake word engine for a model you train yourself ("Hi Asurada" on the maker's figure). The trained model is not included and there is no firmware file for it; see `source/asurada_v03/README.md`. Everything else in this README describes v02, the firmware in `firmware/`.
-> **v03 (소스만):** `source/asurada_v03` 은 직접 학습한 모델을 돌리는 호출어 엔진을 넣은 다음 판입니다 (제작자의 피규어에서는 "Hi Asurada"). 학습한 모델과 설치용 펌웨어 파일은 들어 있지 않습니다. `source/asurada_v03/README.md` 를 보세요. 이 README의 나머지는 `firmware/` 에 있는 v02 기준입니다.
-
-The sketch is in `source/asurada_v02`. / 스케치는 `source/asurada_v02` 에 있습니다.
+The sketch is in `source/asurada_v03`; its `README.md` describes the wake word engine and how to use your own wake word. / 스케치는 `source/asurada_v03` 에 있고, 그 폴더의 `README.md` 에 호출어 엔진과 자기 호출어를 넣는 방법이 있습니다.
 
 - Arduino IDE with the **esp32** board package 3.3.10 / Arduino IDE와 **esp32** 보드 패키지 3.3.10
 - Tools: Board **ESP32S3 Dev Module**, Flash Size **16MB**, PSRAM **OPI PSRAM**, Partition Scheme **ESP SR 16M (3MB APP/7MB SPIFFS/2.9MB MODEL)**, USB CDC On Boot **Enabled**
 - Libraries / 라이브러리: lvgl 8.4.0, GFX Library for Arduino 1.6.4, SensorLib 0.3.1, XPowersLib 0.2.6, Adafruit NeoPixel 1.15.5
-- Copy `source/asurada_v02/setup/lv_conf.h` into your `Arduino/libraries/` folder (next to the `lvgl` folder). LVGL looks for it there. / `source/asurada_v02/setup/lv_conf.h` 를 `Arduino/libraries/` 폴더(`lvgl` 폴더 옆)에 복사합니다. LVGL이 그 자리에서 찾습니다.
+- Copy `source/asurada_v03/setup/lv_conf.h` into your `Arduino/libraries/` folder (next to the `lvgl` folder). LVGL looks for it there. / `source/asurada_v03/setup/lv_conf.h` 를 `Arduino/libraries/` 폴더(`lvgl` 폴더 옆)에 복사합니다. LVGL이 그 자리에서 찾습니다.
 - Settings you can change are collected in `config.h`. `assets.h` is generated and is not meant to be edited by hand (the generator script is not part of this package). / 바꿀 수 있는 값은 `config.h` 에 모여 있습니다. `assets.h` 는 자동으로 만든 파일이라 손으로 고치지 않습니다 (만드는 스크립트는 이 묶음에 없습니다).
 - With the ESP SR partition scheme the Arduino IDE also writes the voice models when it uploads. / ESP SR 파티션을 고르면 Arduino IDE가 올릴 때 음성 모델도 같이 씁니다.
 
 ## Notes / 참고
 
+- **Wake word model:** the "Hi Asurada" model (in `firmware/asurada-head-app.bin`, `firmware/asurada-head-full-0x0.bin` and `source/asurada_v03/src/wake/wake_model.h`) was trained for this project with [microWakeWord](https://github.com/OHF-Voice/micro-wake-word). The data used for training carries usage restrictions, so **the model is for non-commercial personal use only**; details are in `THIRD-PARTY-NOTICES.txt`. It was trained mostly on one voice and may respond less well to other voices. / **호출어 모델:** "Hi Asurada" 모델은 이 프로젝트에서 microWakeWord로 학습한 것입니다. 학습에 쓴 자료에 사용 조건이 붙어 있어 **모델은 비상업 개인용으로만 쓸 수 있습니다** (자세한 내용은 `THIRD-PARTY-NOTICES.txt`). 주로 한 사람의 목소리로 학습해서 다른 목소리에는 덜 반응할 수 있습니다.
+- **Earlier version:** the firmware with Espressif's "Hi ESP" wake word (v02), which has no such restriction, is kept at the [`v02` tag](https://github.com/Baekjh6/asurada-head-firmware/tree/v02). / **이전 판:** Espressif의 "Hi ESP" 호출어를 쓰는 펌웨어(v02)는 이런 제한이 없고 [`v02` 태그](https://github.com/Baekjh6/asurada-head-firmware/tree/v02)에 남아 있습니다.
 - Licences of the components used: `THIRD-PARTY-NOTICES.txt`. The in-browser installer is [ESP Web Tools](https://github.com/esphome/esp-web-tools) (Apache-2.0, copy in `vendor/`). / 사용한 구성 요소의 라이선스는 `THIRD-PARTY-NOTICES.txt`, 브라우저 설치 도구는 ESP Web Tools(Apache-2.0, `vendor/`에 사본).
 - Display board: Waveshare ESP32-S3-Touch-AMOLED-1.75 (not affiliated). / 디스플레이 보드: Waveshare ESP32-S3-Touch-AMOLED-1.75 (제휴 아님).
